@@ -1,0 +1,8 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: eticketbooking
+  threads:
+    virtual:
+      enabled: true
