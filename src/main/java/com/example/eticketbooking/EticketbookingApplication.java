@@ -2,12 +2,14 @@ package com.example.eticketbooking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * Main application class for the e-ticket booking application.
  * @author Sarat
  */
 @SpringBootApplication
+@EnableJpaRepositories("com.example.eticketbooking.dao")
 public class EticketbookingApplication {
 
 	public static void main(String[] args) {
