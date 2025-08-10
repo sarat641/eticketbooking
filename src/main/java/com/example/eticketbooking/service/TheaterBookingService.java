@@ -20,11 +20,24 @@ import java.util.List;
 public class TheaterBookingService implements TheaterBooking {
     private final TheaterBookingDao theaterBookingDao;
 
+    /**
+     * Retrieves theaters showing a specific movie in a given city on a specified date.
+     *
+     * @param browseTheaterRequest The request containing movie name, city, and date.
+     * @return List of ShowTiming containing details of theaters and show timings.
+     */
     @Override
     public List<ShowTiming> getTheatersByMovieNameCityAndDate(BrowseTheaterRequest browseTheaterRequest) {
         return theaterBookingDao.getTheatersByMovieNameCityAndDate(browseTheaterRequest.getMovieName(),
                 browseTheaterRequest.getCity(), browseTheaterRequest.getDate());
     }
+    /**
+     * Books seats for a movie show.
+     *
+     * @param bookSeat The request containing details of the seats to be booked.
+     * @return BookingConfirmation containing booking details.
+     * @throws EticketGlobalException if no seats are available or if the requested seats are not available.
+     */
 
     @Override
     public BookingConfirmation bookSeats(BookSeat bookSeat) {
@@ -41,6 +54,13 @@ public class TheaterBookingService implements TheaterBooking {
 
         return theaterBookingDao.bookSeats(bookSeat, listOfSeats, showId);
     }
+    /**
+     * Checks if all requested seats are available.
+     *
+     * @param listOfSeatsInDB List of seats available in the database.
+     * @param listOfSeatsInRequest List of seats requested by the user.
+     * @return true if all requested seats are available, false otherwise.
+     */
     private boolean isAllSeatsAvailable(List<SeatsDTO> listOfSeatsInDB, List<String> listOfSeatsInRequest) {
         return ApplicationUtil.isTwoListsEqual(listOfSeatsInDB.stream().filter(SeatsDTO::getIsAvailable)
                 .map(SeatsDTO::getSeatNumber).toList(), listOfSeatsInRequest);

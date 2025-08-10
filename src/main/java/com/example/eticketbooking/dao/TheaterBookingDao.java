@@ -29,6 +29,14 @@ import java.util.List;
 public class TheaterBookingDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    /**
+     * Retrieves theaters showing a specific movie in a given city on a specified date.
+     *
+     * @param movieName The name of the movie.
+     * @param city      The city where the theaters are located.
+     * @param date      The date for which to find show timings.
+     * @return A list of ShowTiming objects containing theater and show details.
+     */
     public List<ShowTiming> getTheatersByMovieNameCityAndDate(String movieName, String city, LocalDate date) {
 
         String sql = """
@@ -57,6 +65,14 @@ public class TheaterBookingDao {
                 }
         );
     }
+    /**
+     * Books seats for a show.
+     *
+     * @param bookSeat      The booking details including user ID, payment method, etc.
+     * @param listOfSeats   The list of seats to be booked.
+     * @param showId        The ID of the show for which seats are being booked.
+     * @return BookingConfirmation containing booking details.
+     */
 
     @Transactional
     public BookingConfirmation bookSeats(BookSeat bookSeat,List<SeatsDTO> listOfSeats,String showId) {
@@ -109,6 +125,12 @@ public class TheaterBookingDao {
         }
         return bookingConfirmation;
     }
+    /**
+     * Retrieves available seats based on the provided booking details.
+     *
+     * @param bookSeat The booking details containing city, theater name, movie name, show time, and seat numbers.
+     * @return A list of available seats matching the criteria.
+     */
     public List<SeatsDTO> getAvailableSeats(BookSeat bookSeat) {
 
         String getSeatAvailabilityFromTheaterNameCityMovieNameAndShowTimeSQL = """
