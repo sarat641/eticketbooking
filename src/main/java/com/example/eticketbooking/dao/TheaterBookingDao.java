@@ -6,8 +6,6 @@ import com.example.eticketbooking.dto.SeatsDTO;
 import com.example.eticketbooking.dto.ShowTiming;
 import com.example.eticketbooking.enums.BookingStatus;
 import com.example.eticketbooking.enums.BookingStatusMessage;
-import com.example.eticketbooking.enums.ResponseEnum;
-import com.example.eticketbooking.exceptions.EticketGlobalException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -61,16 +59,9 @@ public class TheaterBookingDao {
     }
 
     @Transactional
-    public BookingConfirmation bookSeats(BookSeat bookSeat) {
+    public BookingConfirmation bookSeats(BookSeat bookSeat,List<SeatsDTO> listOfSeats,String showId) {
 
-        List<SeatsDTO> listOfSeats= getSeats(bookSeat);
         BookingConfirmation bookingConfirmation = new BookingConfirmation();
-
-        String showId = listOfSeats.stream().findAny()
-                .map(SeatsDTO::getShowId)
-                .map(String::valueOf)
-                .orElseThrow(() -> new EticketGlobalException(ResponseEnum.NO_SEATS_AVAILABLE.getCode(),ResponseEnum.NO_SEATS_AVAILABLE.getHttpCode(),
-                        ResponseEnum.NO_SEATS_AVAILABLE.getMessage()));
         String userBookingSQL = """
                 INSERT INTO USER_BOOKINGS (show_id, user_id, booking_time, total_amount, payment_status, payment_method)
                 VALUES (:show_id, :user_id,  NOW(), :total_amount,'Confirmed', :payment_method)
@@ -116,11 +107,9 @@ public class TheaterBookingDao {
             bookingConfirmation.setPaymentMethod(bookSeat.getPaymentMethod());
             bookingConfirmation.setConfirmationMessage(BookingStatusMessage.CONFIRMED.getMessage());
         }
-
-
         return bookingConfirmation;
     }
-    public List<SeatsDTO> getSeats(BookSeat bookSeat) {
+    public List<SeatsDTO> getAvailableSeats(BookSeat bookSeat) {
 
         String getSeatAvailabilityFromTheaterNameCityMovieNameAndShowTimeSQL = """
                 SELECT s.is_available,s.seat_id,s.seat_number,s.seat_type,s.seat_price,sh.show_id FROM SEATS s 
