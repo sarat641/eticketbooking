@@ -3,6 +3,7 @@ package com.example.eticketbooking.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class BookingConfirmation {
     private String theaterName; // Name of the theater
     private String movieName; // Name of the movie
     private String date; // Date of the show
-    private String showTime; // Time of the show
+    private LocalDateTime showTime; // Time of the show
     private int numberOfSeats; // Total number of seats booked
     private String seatType; // Type of seats booked (e.g., Regular, Premium, VIP)
     private List<String> seatNumbers; // List of seat numbers booked

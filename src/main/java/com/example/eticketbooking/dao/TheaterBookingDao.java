@@ -4,6 +4,8 @@ import com.example.eticketbooking.dto.BookSeat;
 import com.example.eticketbooking.dto.BookingConfirmation;
 import com.example.eticketbooking.dto.SeatsDTO;
 import com.example.eticketbooking.dto.ShowTiming;
+import com.example.eticketbooking.enums.BookingStatus;
+import com.example.eticketbooking.enums.BookingStatusMessage;
 import com.example.eticketbooking.enums.ResponseEnum;
 import com.example.eticketbooking.exceptions.EticketGlobalException;
 import jakarta.transaction.Transactional;
@@ -99,7 +101,7 @@ public class TheaterBookingDao {
             namedParameterJdbcTemplate.batchUpdate(sql, paramsList.toArray(new SqlParameterSource[0]));
             bookingConfirmation.setBookingId(String.valueOf(userBookingId));
             bookingConfirmation.setUserId(bookSeat.getUserId());
-            bookingConfirmation.setShowId(bookSeat.getShowId());
+            bookingConfirmation.setShowId(showId);
             bookingConfirmation.setTheaterName(bookSeat.getTheaterName());
             bookingConfirmation.setMovieName(bookSeat.getMovieName());
             bookingConfirmation.setDate(bookSeat.getDate());
@@ -107,12 +109,12 @@ public class TheaterBookingDao {
             bookingConfirmation.setNumberOfSeats(listOfSeats.size());
             bookingConfirmation.setSeatType(bookSeat.getSeatType());
             bookingConfirmation.setSeatNumbers(listOfSeats.stream().map(SeatsDTO::getSeatNumber).toList());
-            bookingConfirmation.setBookingStatus("Confirmed");
+            bookingConfirmation.setBookingStatus(BookingStatus.CONFIRMED.name());
             bookingConfirmation.setBookingTimestamp(java.time.OffsetDateTime.now().toString());
             bookingConfirmation.setTotalAmount(totalAmount
                     .toString());
             bookingConfirmation.setPaymentMethod(bookSeat.getPaymentMethod());
-            bookingConfirmation.setConfirmationMessage("Booking confirmed successfully!");
+            bookingConfirmation.setConfirmationMessage(BookingStatusMessage.CONFIRMED.getMessage());
         }
 
 
