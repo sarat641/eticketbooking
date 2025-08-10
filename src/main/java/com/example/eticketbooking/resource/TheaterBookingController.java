@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,5 +49,10 @@ public class TheaterBookingController {
     @PostMapping(path = "/theaters/book-seats")
     public BookingConfirmation bookSeats(@RequestBody @Valid BookSeat bookSeat) {
         return theaterBooking.bookSeats(bookSeat);
+    }
+
+    @GetMapping(path = "/hello/eticket")
+    public String sayHello() {
+        return "Hello, welcome to the e-ticket booking system!";
     }
 }
