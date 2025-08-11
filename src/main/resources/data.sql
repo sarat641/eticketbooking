@@ -28,8 +28,8 @@ VALUES
 
 INSERT INTO MOVIES (title, description, metadata, criteria, release_date, duration, language_id)
 VALUES
-('Bahubali','Action Movie', '{"director":"Rajamouli"}', '{"age_rating":"PG-13"}', '2023-01-01', 120, 1),
-('Housefull 5','Comedy Movie', '{"director":"Tarun Mansukhani"}', '{"age_rating":"PG"}', '2023-02-01', 90, 2);
+('Bahubali','Action Movie', '{"director":"Rajamouli"}', '{"age_rating":"A"}', '2025-08-15', 120, 1),
+('Housefull 5','Comedy Movie', '{"director":"Tarun Mansukhani"}', '{"age_rating":"U"}', '2025-08-15', 90, 2);
 
 INSERT INTO MOVIE_GENRE_RELATION (movie_id, genre_id) VALUES
 (1, 1),
@@ -42,10 +42,10 @@ VALUES
 
 INSERT INTO SHOWS (movie_id, theater_id, show_time, show_date)
 VALUES
-(1, 1, '2025-08-10 18:00:00', '2025-08-10'),
-(2, 2, '2025-08-11 20:00:00', '2025-08-11'),
-(1, 1, '2025-08-10 22:00:00', '2025-08-10'),
-(2, 2, '2025-08-11 23:00:00', '2025-08-11');
+(1, 1, '2025-08-18 18:00:00', '2025-08-18'),
+(2, 2, '2025-08-18 20:00:00', '2025-08-18'),
+(1, 1, '2025-08-19 22:00:00', '2025-08-19'),
+(2, 2, '2025-08-19 23:00:00', '2025-08-19');
 
 INSERT INTO SEATS (theater_id, seat_number, seat_type,seat_price, is_available)
 VALUES
@@ -53,16 +53,16 @@ VALUES
 (1, 'A2', 'REGULAR', 150.0,TRUE),
 (2, 'B1', 'VIP', 250,TRUE);
 
-INSERT INTO USER_BOOKINGS (user_id, show_id, total_amount, payment_status,payment_method, is_cancelled)
-VALUES
-('sarat@gmail.com', 1, 300.00, 'COMPLETED','UPI', FALSE),
-('babu@gmail.com', 2, 200.00, 'PENDING', 'UPI',FALSE);
+--INSERT INTO USER_BOOKINGS (user_id, show_id, total_amount, payment_status,payment_method, is_cancelled)
+--VALUES
+--('sarat@gmail.com', 1, 300.00, 'COMPLETED','UPI', FALSE),
+--('babu@gmail.com', 2, 200.00, 'PENDING', 'UPI',FALSE);
 
-INSERT INTO TICKET_BOOKINGS (booking_id, seat_id, ticket_price, is_refunded)
-VALUES
-(1, 1, 150.00, FALSE),
-(1, 2, 150.00, FALSE),
-(2, 3, 200.00, FALSE);
+--INSERT INTO TICKET_BOOKINGS (booking_id, seat_id, ticket_price, is_refunded)
+--VALUES
+--(1, 1, 150.00, FALSE),
+--(1, 2, 150.00, FALSE),
+--(2, 3, 200.00, FALSE);
 
 INSERT INTO DISCOUNTS (discount_name, description, discount_type, discount_value, criteria, is_active)
 VALUES

@@ -1,6 +1,8 @@
 package com.example.eticketbooking.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -10,6 +12,8 @@ import java.math.BigDecimal;
  * @author Sarat
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SeatsDTO {
 
     private Integer seatId;

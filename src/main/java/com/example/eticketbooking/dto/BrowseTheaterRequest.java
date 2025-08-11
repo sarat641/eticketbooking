@@ -29,6 +29,6 @@ public class BrowseTheaterRequest {
     @NotNull
     @FutureOrPresent
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    @Schema(defaultValue = "10-08-2025")
+    @Schema(defaultValue = "18-08-2025")
     private LocalDate date;
 }
