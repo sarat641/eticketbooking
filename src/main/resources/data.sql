@@ -53,16 +53,6 @@ VALUES
 (1, 'A2', 'REGULAR', 150.0,TRUE),
 (2, 'B1', 'VIP', 250,TRUE);
 
---INSERT INTO USER_BOOKINGS (user_id, show_id, total_amount, payment_status,payment_method, is_cancelled)
---VALUES
---('sarat@gmail.com', 1, 300.00, 'COMPLETED','UPI', FALSE),
---('babu@gmail.com', 2, 200.00, 'PENDING', 'UPI',FALSE);
-
---INSERT INTO TICKET_BOOKINGS (booking_id, seat_id, ticket_price, is_refunded)
---VALUES
---(1, 1, 150.00, FALSE),
---(1, 2, 150.00, FALSE),
---(2, 3, 200.00, FALSE);
 
 INSERT INTO DISCOUNTS (discount_name, description, discount_type, discount_value, criteria, is_active)
 VALUES
