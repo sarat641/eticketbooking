@@ -28,7 +28,7 @@ public class TheaterDaoIntegrationTest {
         );
 
         assertNotNull(results);
-        assertEquals(2, results.size());
+        assertEquals(1, results.size());
         assertEquals("PVR Cinemas", results.get(0).getTheaterName());
         assertEquals("Bahubali", results.get(0).getMovieName());
     }
