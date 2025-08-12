@@ -19,7 +19,7 @@ public class BookSeat {
     @NotNull
     @FutureOrPresent
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
-    @Schema(defaultValue = "18-08-2025 22:00:00")
+    @Schema(defaultValue = "19-08-2025 22:00:00")
     private LocalDateTime showTime;
     private String date;
     @NotNull
