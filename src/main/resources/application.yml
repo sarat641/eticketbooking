@@ -32,3 +32,7 @@ spring:
     leak-detection-threshold: 2000
     auto-commit: false
     connection-test-query: SELECT 1
+
+logging:
+  level:
+    root: INFO

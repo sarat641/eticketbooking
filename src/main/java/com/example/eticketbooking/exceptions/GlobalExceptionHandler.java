@@ -3,6 +3,9 @@ package com.example.eticketbooking.exceptions;
 import com.example.eticketbooking.dto.ResponseDTO;
 import com.example.eticketbooking.dto.ValidationErrorDTO;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -27,6 +30,7 @@ import java.util.Locale;
 public class GlobalExceptionHandler {
 
     private final MessageSource messageSource;
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(org.springframework.http.HttpStatus.BAD_REQUEST)
@@ -41,6 +45,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(org.springframework.http.HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ResponseEntity<ResponseDTO<Object>> applicationException(EticketGlobalException e) {
+        logger.error(ExceptionUtils.getStackTrace(e));
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new ResponseDTO<>( e.getCode(),e.getMessage(), null));
@@ -50,6 +55,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ValidationErrorDTO processValidationError(MethodArgumentNotValidException ex) {
+        logger.error(ExceptionUtils.getStackTrace(ex));
         BindingResult result = ex.getBindingResult();
         List<FieldError> fieldErrors = result.getFieldErrors();
 
